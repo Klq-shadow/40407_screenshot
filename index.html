@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="static/css/css.css" />
     <link rel="stylesheet" type="text/css" href="static/css/home.css" />
     <link rel="stylesheet" type="text/css" href="static/css/swiper.min.css" />
+    <link rel="stylesheet" href="static/css/viewer.css" />
     <link rel="shortcut icon" href="/public/img/favicon.ico" />
     <script type="text/javascript">
       var BaseUrl = "https://www.40407.com/";
@@ -434,25 +435,57 @@
           <h2 class="flex_grow">Screenshots</h2>
         </div>
       </div>
-      <div class="swiper-container1 bg" id="xzImg">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <a href="https://img.40407.com/upload/202406/26/261141544fc627iyrxvEOsGg6ql.webp" data-fancybox="appScreenshot">
-              <img alt="Idle Vlogger - Rich Me screenshot 1" src="static/picture/261141544fc627iyrxveosgg6ql.webp" />
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="https://img.40407.com/upload/202406/26/26114154a3c1art2GNMn0lTcs5r.webp" data-fancybox="appScreenshot">
-              <img alt="Idle Vlogger - Rich Me screenshot 2" src="static/picture/26114154a3c1art2gnmn0ltcs5r.webp" />
-            </a>
-          </div>
-          <div class="swiper-slide">
-            <a href="https://img.40407.com/upload/202406/26/26114154e7a26EsP6mdHVU3usqw.webp" data-fancybox="appScreenshot">
-              <img alt="Idle Vlogger - Rich Me screenshot 3" src="static/picture/26114154e7a26esp6mdhvu3usqw.webp" />
-            </a>
-          </div>
+      <div id="screenshot-scroll" class="show_img screen-shot js-screenshot-scroll">
+        <div class="swiper-container gameImg">
+          <ul class="swiper-wrapper">
+            <li class="js-screen-shot-link swiper-slide">
+              <img src="https://image.51wma.com/upload/202406/26/22ff6S1REBhsg6p.jpg" alt="VidMate screenshot 1" />
+            </li>
+
+            <li class="js-screen-shot-link swiper-slide">
+              <img src="https://img.apktom.com/upload/202406/26/20a4135wDSIHtrW.png" alt="VidMate screenshot 2" />
+            </li>
+
+            <li class="js-screen-shot-link swiper-slide">
+              <img src="https://img.apktom.com/upload/202406/26/8251feU3oFdtk8X.png" alt="VidMate screenshot 3" />
+            </li>
+
+            <li class="js-screen-shot-link swiper-slide">
+              <img src="https://img.apktom.com/upload/202406/26/99e1bChHm1nTBR6.png" alt="VidMate screenshot 4" />
+            </li>
+
+            <li class="js-screen-shot-link swiper-slide">
+              <img src="https://img.apktom.com/upload/202406/26/8d6539f6qsY2SPH.jpg" alt="VidMate screenshot 5" />
+            </li>
+
+            <li class="js-screen-shot-link swiper-slide">
+              <img src="https://img.apktom.com/upload/202406/26/e503btJKEFOInak.jpg" alt="VidMate screenshot 6" />
+            </li>
+          </ul>
         </div>
+        <div class="scroll-bar"></div>
       </div>
+      <script>
+        $(function () {
+          if ($(".show_img").length > 0) {
+            var img_swiper = new Swiper(".gameImg", {
+              slidesOffsetBefore: 0,
+              slidesOffsetAfter: 0,
+              slidesPerView: "auto",
+              spaceBetween: 10,
+              freeMode: true,
+            });
+            let img = new Image();
+            img.src = $(".gameImg .swiper-slide img").attr("src");
+            img.onload = function () {
+              if (img.width > img.height) {
+                $(".gameImg .swiper-slide").height(160);
+                $(".gameImg .swiper-slide img").height(160);
+              }
+            };
+          }
+        });
+      </script>
 
       <div class="h20"></div>
       <div class="game_detail_phb screenshot tab_box">
@@ -1085,4 +1118,33 @@
       });
     </script>
   </body>
+  <script src="static/js/viewer.js"></script>
+  <script>
+    $(document).ready(function () {
+      var viewer = new Viewer(document.querySelector(".gameImg"), {
+        viewed: function () {
+          var observer = new MutationObserver(function (mutations) {
+            mutations.forEach(function (mutation) {
+              mutation.addedNodes.forEach(function (node) {
+                if (node.nodeType === 1 && $(node).is(".viewer-canvas img")) {
+                  $(node).on("click", function () {
+                    viewer.hide();
+                  });
+                }
+              });
+            });
+          });
+
+          observer.observe(document.body, {
+            childList: true,
+            subtree: true,
+          });
+        },
+      });
+
+      $(".js-screen-shot-link img").on("click", function () {
+        viewer.show();
+      });
+    });
+  </script>
 </html>

@@ -277,60 +277,6 @@ a {
     background-size: 5rem 6rem;
 }
 
-.slider {
-    height: 2.08rem;
-}
-
-.slider a {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.slider img {
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-.slider .swiper-pagination-bullet {
-    width: .2rem;
-    height: .04rem;
-}
-
-.slider .swiper-pagination-bullet.swiper-pagination-bullet-active {
-    background: #ffaf13;
-}
-
-.slider .swiper-pagination-bullet {
-    background: #fff;
-    border-radius: 0;
-}
-
-.swiper-container {
-    width: 100%;
-    height: 100%;
-}
-
-.swiper-slide {
-    width: auto !important;
-    text-align: center;
-    text-align: center;
-    font-size: 18px;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    -webkit-align-items: center;
-    align-items: center;
-}
-
 .index_nav {
     padding: .4rem 0 .3rem 0;
 }
@@ -1829,115 +1775,30 @@ header .menu2 i {
     max-width: 80%;
 }
 
-.swiper-container1 {
-    padding: 0 0 .3rem .3rem;
+
+ .screen-shot {
     position: relative;
-    overflow: hidden;
-    width: auto;
-    height: 235px;
-}
-
-.swiper-container1 .swiper-slide {
-    width: 1.5rem
-}
-
-.swiper-container1 img {
-    width: 100%;
-    height: 4.7rem;
-}
-
-.swiper-container1>.swiper-pagination {
-    bottom: 0 !important
-}
-
-.swiper-container {
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    z-index: 1
-}
-
-.swiper-wrapper.hide {
-    display: none;
-}
-
-.swiper-wrapper {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-transition-property: -webkit-transform;
-    -moz-transition-property: -moz-transform;
-    -o-transition-property: -o-transform;
-    -ms-transition-property: -ms-transform;
-    transition-property: transform;
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box
-}
-
-.swiper-container-android .swiper-slide,
-.swiper-wrapper {
-    -webkit-transform: translate3d(0, 0, 0);
-    -moz-transform: translate3d(0, 0, 0);
-    -o-transform: translate(0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0)
-}
-
-.swiper-slide {
-    -webkit-flex-shrink: 0;
-    -ms-flex: 0 0 auto;
-    flex-shrink: 0;
-    width: 100%;
-    height: 100%;
-    position: relative
-}
-
-.swiper-pagination {
-    position: absolute;
-    text-align: center;
-    -webkit-transition: .3s;
-    -moz-transition: .3s;
-    -o-transition: .3s;
-    transition: .3s;
-    -webkit-transform: translate3d(0, 0, 0);
-    -ms-transform: translate3d(0, 0, 0);
-    -o-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-    z-index: 10
-}
-
-.swiper-container-horizontal>.swiper-pagination {
-    bottom: 0;
-    left: 0;
-    width: 100%
-}
-
-.swiper-pagination-bullet {
-    width: 6px;
-    height: 6px;
-    display: inline-block;
-    margin: 0 .05rem;
-    border-radius: 100%;
-    background: #000;
-    opacity: .2
-}
-
-/* swiper-container .swiper-pagination-bullet-active{background:#ff6008} */
-.swiper-container-free-mode>.swiper-wrapper {
-    -webkit-transition-timing-function: ease-out;
-    -moz-transition-timing-function: ease-out;
-    -ms-transition-timing-function: ease-out;
-    -o-transition-timing-function: ease-out;
-    transition-timing-function: ease-out;
-    margin: 0 auto
-}
+    padding: .3rem 0 .12rem 0;
+    /* margin: 0 -0.4rem; */
+    overflow: hidden
+  }
+  
+   .screen-shot ul {
+    display: table;
+    padding: 0 .3rem;
+    overflow: hidden
+  }
+  
+   .screen-shot ul li {
+    display: table-cell;
+    padding-right: .18rem;
+    text-align: center
+  }
+  
+   .screen-shot ul li img {
+    height: 3.46rem;
+    vertical-align: middle
+  }
 
 /* 新品榜单 */
 .game_detail_phb {
