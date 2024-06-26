@@ -1127,8 +1127,46 @@
             mutations.forEach(function (mutation) {
               mutation.addedNodes.forEach(function (node) {
                 if (node.nodeType === 1 && $(node).is(".viewer-canvas img")) {
+                  var clickCount = 0;
+                  var clickTimeout;
+                  var originalScale = 1;
+                  var currentScale = 1;
+
                   $(node).on("click", function () {
-                    viewer.hide();
+                    clickCount++;
+                    if (clickCount === 1) {
+                      clickTimeout = setTimeout(function () {
+                        if (clickCount === 1) {
+                          viewer.hide();
+                        }
+                        clickCount = 0;
+                      }, 300);
+                    }
+                  }).on("dblclick", function () {
+                    clearTimeout(clickTimeout);
+                    clickCount = 0;
+                    if (currentScale === originalScale) {
+                      currentScale *= 1.2;  
+                    } else {
+                      currentScale = originalScale;
+                    }
+                    viewer.scaleX(currentScale);
+                    viewer.scaleY(currentScale);
+                  }).on("touchstart", function (e) {
+                    if (e.touches.length > 1) {
+                      clearTimeout(clickTimeout);
+                      clickCount = 0;
+                    }
+                  }).on("touchend", function () {
+                    if (currentScale !== originalScale) {
+                      $(node).on("dblclick", function () {
+                        clearTimeout(clickTimeout);
+                        clickCount = 0;
+                        currentScale = originalScale;
+                        viewer.scaleX(currentScale);
+                        viewer.scaleY(currentScale);
+                      });
+                    }
                   });
                 }
               });
