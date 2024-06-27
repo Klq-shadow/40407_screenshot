@@ -1132,42 +1132,58 @@
                   var originalScale = 1;
                   var currentScale = 1;
 
-                  $(node).on("click", function () {
-                    clickCount++;
-                    if (clickCount === 1) {
-                      clickTimeout = setTimeout(function () {
-                        if (clickCount === 1) {
-                          viewer.hide();
-                        }
-                        clickCount = 0;
-                      }, 300);
-                    }
-                  }).on("dblclick", function () {
+                  function handleDblClick() {
                     clearTimeout(clickTimeout);
                     clickCount = 0;
+                    var img = node;
+                    var imgWidth = img.naturalWidth;
+                    var imgHeight = img.naturalHeight;
+                    var windowWidth = window.innerWidth;
+                    var windowHeight = window.innerHeight;
+                    console.log("imgWidth", imgWidth);
+                    console.log("imgHeight", imgHeight);
+                    console.log("windowWidth", windowWidth);
+                    console.log("windowHeight", windowHeight);
+
+                    var imgAspectRatio = imgWidth / imgHeight;
+                    var windowAspectRatio = windowWidth / windowHeight;
                     if (currentScale === originalScale) {
-                      currentScale *= 1.2;  
+                      currentScale *= 1.2; // 将图片放大到120%
                     } else {
-                      currentScale = originalScale;
+                      currentScale = originalScale; // 回到原始大小
+                    }
+
+                    if (imgWidth * currentScale > windowWidth) {
+                      currentScale = windowWidth / imgWidth;
                     }
                     viewer.scaleX(currentScale);
                     viewer.scaleY(currentScale);
-                  }).on("touchstart", function (e) {
-                    if (e.touches.length > 1) {
-                      clearTimeout(clickTimeout);
-                      clickCount = 0;
-                    }
-                  }).on("touchend", function () {
-                    if (currentScale !== originalScale) {
-                      $(node).on("dblclick", function () {
+                  }
+
+                  $(node)
+                    .on("click", function () {
+                      clickCount++;
+                      if (clickCount === 1) {
+                        clickTimeout = setTimeout(function () {
+                          if (clickCount === 1) {
+                            viewer.hide();
+                          }
+                          clickCount = 0;
+                        }, 300);
+                      }
+                    })
+                    .on("dblclick", handleDblClick)
+                    .on("touchstart", function (e) {
+                      if (e.touches.length > 1) {
                         clearTimeout(clickTimeout);
                         clickCount = 0;
-                        currentScale = originalScale;
-                        viewer.scaleX(currentScale);
-                        viewer.scaleY(currentScale);
-                      });
-                    }
-                  });
+                      }
+                    })
+                    .on("touchend", function () {
+                      if (currentScale !== originalScale) {
+                        $(node).off("dblclick").on("dblclick", handleDblClick);
+                      }
+                    });
                 }
               });
             });
